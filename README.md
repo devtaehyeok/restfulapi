@@ -767,3 +767,107 @@ spring:
 
 yml 서버 재기동, 보안 문제 등
 
+
+# RESTful API 설계 가이드
+
+1. Rechardson MAturity Model
+2. Best Practice
+
+![](/images/README/README_045256.png)
+
+- LEVEL 0
+  기존의 리소스를 웹서비스 형태로 제공.
+  단순히 URI와만 매핑.
+  어떤 메소드로 사용할 것인지 표현
+  (동작값 이후 불필요한 요소)
+- LEVEL 1
+  외부에 제공할 적절한 형태의 URI
+  (URI는 좋음)
+  일정한 패턴이 있지만
+  적절한 Method, code로 매핑 X
+  ex) get, post만 사용하고
+  모든 반환값을 200, ERROR로 처리
+- LEVEL 2
+  메소드도 잘 사용
+  - 단순 읽기 get
+  - 추가 post
+  - 상태 변경 put
+  - 삭제 delete
+- LEVEL 3
+  - LEVEL 2 + HATEOAS
+  - DATA + NEXT POSSIBLE ACTIONS
+
+### BEST PRACTICE
+![](/images/README/README_045827.png)
+- 소비자 지향
+- 메소드, RES, REQ , HEADER 등 HTTP의 장점 고려
+- 적절한 메소드 사용
+- 적절한 상태코드 사용
+- 보안 정보 URI X
+- 복수형 사용
+- 동사보다는 명사
+- 일괄된 접근 ENDPOINT
+![](/images/README/README_050028.png)
+단순 /search 엔드포인트에
+파라미터 등을 이용해 다양한 기능 사용하도록 제공
+
+# Java Persistence API 사용
+
+![](/images/README/README_052710.png)
+
+JPA는 인터페이스 (구현 X)
+하이버네이트와 같은 구현체 필요.
+
+JDBC를 ORM으로 보완 > 하이버네이트
+어떻게 인터페이스 활용? > JPA
+더욱 추상화 > Spring Data JPA
+
+```yml
+# jpa 설졍
+# db 임베디드 인메모리로 사용
+server:
+  port: 8088
+spring:
+  jpa:
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+```
+![](/images/README/README_053138.png)
+
+/h2-console 로그인
+우리가 설정한 id, pw 입력 혹은
+시큐리티 설정 제거
+
+![](/images/README/README_053755.png)
+![](/images/README/README_054316.png)
+
+@Entity
+해당 클래스 이름으로 테이블 생성
+필드를 테이블 컬럼으로 사용
+PK 설정
+@Id
+@GeneratedValue (자동생성)
+
+
+```text
+Hibernate: drop table user if exists
+Hibernate: drop sequence if exists hibernate_sequence
+Hibernate: create sequence hibernate_sequence start with 1 increment by 1
+Hibernate: create table user (id integer not null, join_date timestamp, name varchar(255), password varchar(255), ssn varchar(255), primary key (id))
+
+resources에 data.sql 추가하면
+서버 재기동시 자동 추가됨.
+
+```
+
+![](/images/README/README_055552.png)
+
+Spring Data JPA는 Entity Manager 사용 X
+Repository 인터페이스 사용
+UserRepository 선언만으로 
+CRUD 인터페이스 사용 가능
+
+DB를 객체와 연동하고, 인터페이스가 지원하는 쿼리를 단순 호출로 사용 가능.
+지원 안하면 QueryDSL 써야함.

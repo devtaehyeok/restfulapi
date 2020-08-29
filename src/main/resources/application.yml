@@ -8,10 +8,15 @@ spring:
       enabled: true
   messages:
     basename: messages
-  security:
-    user:
-      password: 123456
-      name: ith13579
+#  security:
+#    user:
+#      password: 123456
+#      name: ith13579
+  jpa:
+    show-sql: true
+  h2:
+    console:
+      enabled: true
 logging:
   level:
     org.springframework: DEBUG
