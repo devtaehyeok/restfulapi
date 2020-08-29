@@ -727,3 +727,43 @@ API 문서 관리 도구.
 
 전체 API 문서화, 클라이언트 HTTP 생성 자동화.
 
+
+# 모니터링 도구 Actutor
+
+localhost:8088/actuator
+
+# HAL BROWSER
+
+![](/images/README/README_003317.png)
+
+HTML 통해 APP에 대한 부가정보 제공
+HETEOS 기능을 위해
+리소스 사용 가능 링크 정보 구현
+이거 안해도 쓸 수 있음.
+
+# Spring Security
+
+![](/images/README/README_003656.png)
+OAUTH, 토큰, 아이디 , 비밀번호
+해당 디펜던시 추가 후 실행하면
+찾기에서 비번 나옴.
+아래와 같이 진행.
+![](/images/README/README_005157.png)
+
+Configuration 클래스 이용
+
+> 설정 문제로 Spring Boot 버전 내림
+
+```yml
+spring:
+    security:
+    user:
+      password: 123456
+      name: ith13579
+
+```
+![](/images/README/README_044456.png)
+![](/images/README/README_044550.png)
+
+yml 서버 재기동, 보안 문제 등
+
