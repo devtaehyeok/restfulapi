@@ -670,3 +670,31 @@ BeanUtils.copyProperties(user, userV2);
 
 1. RequestParam
 ![](/images/README/README_203003.png)
+
+2. Header
+   - X-API-VERSION
+![](/images/README/README_203457.png)
+
+3. MIME TYPE
+Multipurpose Internet Mail Extensions
+예전에는 메일 전송에 사용
+최근은 웹을 위해 많이 사용.
+```java
+@GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv2+json")
+```
+![](/images/README/README_204049.png)
+![](/images/README/README_204029.png)
+
+버전 관리 요약 :
+단순히 보여지는 항목 제어가 아니라
+API 설계나 어플리케이션 구조가 변경될 때도 변경
+사용자 가이드 명시 필요
+![](/images/README/README_204327.png)
+
+URI 너무 지저분/ 과도 정보 포함 지양
+HEADER 너무 많이 지양
+캐싱에 의해 새로운 데이터가 반영 안되는 경우 있음.
+용도에 따라 브라우저에서도 쓸 수 있어야함
+(post HEADER MIME 등 불가)
+API 개발 문서 제공.
+적절한 인터페이스가 없으면 사용자가 쓸 수 없음.

@@ -35,7 +35,7 @@ public class AdminUserController {
 
     // 자동으로 문자로 바꿔서 전해줌~
     // GET /admin/users/1 -> /admin/v1/users/1
-    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=1")
+    @GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv1+json")
     public MappingJacksonValue retriveUserByIdV1(@PathVariable int id) {
         // ctl + alt + v
         User user = service.findOne(id);
@@ -47,7 +47,7 @@ public class AdminUserController {
         return mapping;
     }
     // GET /admin/users/1 -> /admin/v2/users/1
-    @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=2")
+    @GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv2+json")
     public MappingJacksonValue retriveUserByIdV2(@PathVariable int id) {
         // ctl + alt + v
         User user = service.findOne(id);
