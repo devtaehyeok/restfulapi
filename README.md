@@ -883,4 +883,9 @@ post
 한 명이 여러 게시글 작성 가능
 사용자가 존재하지 않는 게시글은 없음.
 게시글은 Optional
+![](/images/README/README_081641.png)
+지연 로딩 -> 페이지 볼때는 유저 필요할 때만 보면 됨.
+![](/images/README/README_081746.png)
 
+![](/images/README/README_084552.png)
+![](/images/README/README_084609.png)
