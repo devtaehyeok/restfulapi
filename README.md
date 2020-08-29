@@ -635,3 +635,21 @@ Accept value 변경해서 다시 json으로
 사용자 정보에 비밀번호, 주민번호 같은
 중요 정보 추가 시 어떻게 처리할 것인가?
 (보안 문제)
+jackson 라이브러리가 처리해줌.
+```java
+    @JsonIgnore
+    private String password;
+    @JsonIgnore
+    private String ssn;
+    // or 
+    @JsonIgnoreProperties(value={"password"})
+
+```
+
+# 프로그래밍으로 제어하는 Filtering 방법 - 개별 사용자 조회 및 전체 사용자 조회
+
+아까처럼 annotation이 아닌 프로그래밍 적으로 제어하는 방법.
+admin을 만들어서, filter이름을 해당 domain 객체에 적용
+admin컨트롤러에서 Filter 사용해서 조회할 필드만 만들기.
+
+![](/images/README/README_200559.png)
