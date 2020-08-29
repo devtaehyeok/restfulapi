@@ -871,3 +871,16 @@ CRUD 인터페이스 사용 가능
 
 DB를 객체와 연동하고, 인터페이스가 지원하는 쿼리를 단순 호출로 사용 가능.
 지원 안하면 QueryDSL 써야함.
+jpa hateos get
+![](/images/README/README_064345.png)
+post
+![](/images/README/README_073744.png)
+
+# POST  추가
+
+![](/images/README/README_074442.png)
+
+한 명이 여러 게시글 작성 가능
+사용자가 존재하지 않는 게시글은 없음.
+게시글은 Optional
+

@@ -1,17 +1,18 @@
 package com.example.restfulwebservice.user;
 
+import com.example.restfulwebservice.post.Post;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,6 +22,7 @@ import java.util.Date;
 // @JsonFilter("UserInfo")
 @Entity
 public class User {
+
     @Id
     @GeneratedValue
     private Integer id;
@@ -37,5 +39,15 @@ public class User {
     //    @JsonIgnore
     @ApiModelProperty(notes = "사용자 주빈번호를 입력해 주세요")
     private String ssn;
+    @OneToMany(mappedBy = "user") // post의 user.
+    private List<Post> posts;
 
+
+    public User(int i, String thLim, Date date, String pass1, String s) {
+        this.id = id;
+        this.name = name;
+        this.joinDate = date;
+        this.password  = pass1;
+        this.ssn = s;
+    }
 }
