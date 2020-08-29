@@ -653,3 +653,15 @@ admin을 만들어서, filter이름을 해당 domain 객체에 적용
 admin컨트롤러에서 Filter 사용해서 조회할 필드만 만들기.
 
 ![](/images/README/README_200559.png)
+
+# URL 이용한 API 버전관리
+
+![](/images/README/README_201321.png)
+여러 회사들은 API 버전을 어떻게 관리할까?
+페이스북은 반드시 버전 명시
+(카카오도 마찬가지)
+![](/images/README/README_201444.png)
+@GetMapping("/v2/users/{id}")
+
+BeanUtils.copyProperties(user, userV2);
+![](/images/README/README_202515.png)

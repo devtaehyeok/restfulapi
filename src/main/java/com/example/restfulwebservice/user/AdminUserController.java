@@ -4,13 +4,13 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.converter.json.MappingJacksonValue;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -19,26 +19,48 @@ import java.util.List;
 //  @GetMapping("/admin/users") <==  @GetMapping("/users") 자동 변환
 public class AdminUserController {
     private final UserDaoService service;
+    private UserV2 userV2;
+
     // 관리자 관련 API
     @GetMapping("/users")
-    public MappingJacksonValue retriveAllUsers(){
+    public MappingJacksonValue retriveAllUsers() {
         // ctrl + alt + v
         List<User> users = service.findAll();
-        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id","name","joinDate","password");
-        FilterProvider filters = new SimpleFilterProvider().addFilter("UserInfo",filter);
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "joinDate", "password");
+        FilterProvider filters = new SimpleFilterProvider().addFilter("UserInfo", filter);
         MappingJacksonValue mapping = new MappingJacksonValue(users);
         mapping.setFilters(filters);
         return mapping;
     }
+
     // 자동으로 문자로 바꿔서 전해줌~
-    @GetMapping("/users/{id}")
-    public MappingJacksonValue retriveUserById(@PathVariable int id){
+    // GET /admin/users/1 -> /admin/v1/users/1
+    @GetMapping("/v1/users/{id}")
+    public MappingJacksonValue retriveUserByIdV1(@PathVariable int id) {
         // ctl + alt + v
         User user = service.findOne(id);
-        if(user == null) throw new UserNotFoundException(String.format("ID[%s] not found",id));
-        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id","name","joinDate","ssn");
-        FilterProvider filters = new SimpleFilterProvider().addFilter("UserInfo",filter);
+        if (user == null) throw new UserNotFoundException(String.format("ID[%s] not found", id));
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "joinDate", "ssn");
+        FilterProvider filters = new SimpleFilterProvider().addFilter("UserInfo", filter);
         MappingJacksonValue mapping = new MappingJacksonValue(user);
+        mapping.setFilters(filters);
+        return mapping;
+    }
+
+    @GetMapping("/v2/users/{id}")
+    public MappingJacksonValue retriveUserByIdV2(@PathVariable int id) {
+        // ctl + alt + v
+        User user = service.findOne(id);
+        if (user == null) throw new UserNotFoundException(String.format("ID[%s] not found", id));
+        // User -> UserV2
+        UserV2 userV2 = new UserV2();
+        // 빈들간 동일한 prpoerties 값 복사해줌
+        BeanUtils.copyProperties(user, userV2); // id, name. joinDate, password, ssn
+        userV2.setGrade("VIP");
+        if (user == null) throw new UserNotFoundException(String.format("ID[%s] not found", id));
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "joinDate", "grade");
+        FilterProvider filters = new SimpleFilterProvider().addFilter("UserInfoV2", filter);
+        MappingJacksonValue mapping = new MappingJacksonValue(userV2);
         mapping.setFilters(filters);
         return mapping;
     }
