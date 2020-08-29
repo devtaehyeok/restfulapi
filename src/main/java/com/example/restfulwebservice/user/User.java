@@ -14,4 +14,7 @@ public class User {
     private String name;
     @Past
     private Date joinDate;
+    private String password;
+    private String ssn;
+
 }

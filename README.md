@@ -614,3 +614,24 @@ protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotV
 다국어 처리 빈을 SpringBootApplication에 등록해서 사용.
 ![](/images/README/README_185310.png)
 코드는 앞으로 commit으로 확인하기.
+
+
+# Response 데이터 형식 변환 - XML format
+
+![](/images/README/README_194426.png)
+
+406 Not Acceptable 
+400번은 클라이언트 잘못
+서버측에서 준비되지 않은 자료 형식
+
+jackson 디펜던시 추가.
+![](/images/README/README_194701.png)
+Accept value 변경해서 다시 json으로
+![](/images/README/README_194735.png)
+
+# Response 데이터 제어 위한 Filtering
+
+![](/images/README/README_194804.png)
+사용자 정보에 비밀번호, 주민번호 같은
+중요 정보 추가 시 어떻게 처리할 것인가?
+(보안 문제)
