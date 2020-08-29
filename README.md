@@ -570,3 +570,47 @@ put은 수정
 ![](/images/SPRING_RESTFUL/SPRING_RESTFUL_174603.png)
 
 하이버네이트의 validation api 사용
+```java
+// UserController
+
+@PostMapping("/users")
+public ResponseEntity<Object> createUser(@Valid @RequestBody User user){
+    User savedUser = service.save(user);
+    URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
+    return ResponseEntity.created(location).build();
+}
+
+//User
+
+@Data
+@AllArgsConstructor
+public class User {
+    private Integer id;
+    @Size(min=2)
+    private String name;
+    @Past
+    private Date joinDate;
+}
+
+// CustomizedResponseEntityExceptionHandler
+
+@Override
+protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    // getBindingResult : Return the results of the failed validation.
+    ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),ex.getMessage(),ex.getBindingResult().toString());
+    return new ResponseEntity<>(exceptionResponse,HttpStatus.BAD_REQUEST);
+}
+```
+
+![](/images/README/README_182042.png)
+
+# 다국어 처리를 위한 Internationalization 구현 방법
+
+
+![](/images/README/README_182430.png)
+하나의 출력 값 여러 언어로
+지역 코드에 따라 적절한 언어로 표현
+프로토콜 전반적으로 걸쳐서 사용
+다국어 처리 빈을 SpringBootApplication에 등록해서 사용.
+![](/images/README/README_185310.png)
+코드는 앞으로 commit으로 확인하기.

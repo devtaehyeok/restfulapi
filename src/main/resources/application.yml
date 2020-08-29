@@ -6,6 +6,9 @@ spring:
       enabled: true
     restart:
       enabled: true
+  messages:
+    basename: messages
 logging:
   level:
     org.springframework: DEBUG
+
