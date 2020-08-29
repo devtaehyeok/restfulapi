@@ -1,0 +1,11 @@
+server:
+  port: 8088
+spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+logging:
+  level:
+    org.springframework: DEBUG
