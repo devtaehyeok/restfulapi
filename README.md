@@ -698,3 +698,32 @@ HEADER 너무 많이 지양
 (post HEADER MIME 등 불가)
 API 개발 문서 제공.
 적절한 인터페이스가 없으면 사용자가 쓸 수 없음.
+
+![](/images/README/README_211013.png)
+스프링 부트 API 통해
+문서관리 모니터링
+
+HATEOS APP 상태정보
+Swagger UI
+Actuator
+
+![](/images/README/README_211542.png)
+0 : 단순 자원 전달 (HTTP/WEB PROTOCOL)
+1 : 리소스(URI) 
+2 : HTTP 메소드/상태
+3 : 리소스 정보 추가 사용법 전달
+
+hateoas 라이브러리 설치
+
+![](/images/README/README_222426.png)
+
+요청한 정보와
+무엇을 할 수 있는지 추가 정보를 받음
+(삭제, 조회, 수정 등 다양한 API 정보를 제공할 수 있음.)
+
+# REST API Documentation을 위한 Swagger 사용
+
+API 문서 관리 도구.
+
+전체 API 문서화, 클라이언트 HTTP 생성 자동화.
+
