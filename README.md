@@ -665,3 +665,8 @@ admin컨트롤러에서 Filter 사용해서 조회할 필드만 만들기.
 
 BeanUtils.copyProperties(user, userV2);
 ![](/images/README/README_202515.png)
+
+# RequestParam과 Header를 이용한 API Version 관리
+
+1. RequestParam
+![](/images/README/README_203003.png)

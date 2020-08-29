@@ -35,7 +35,7 @@ public class AdminUserController {
 
     // 자동으로 문자로 바꿔서 전해줌~
     // GET /admin/users/1 -> /admin/v1/users/1
-    @GetMapping("/v1/users/{id}")
+    @GetMapping(value = "/users/{id}", params = "version=1")
     public MappingJacksonValue retriveUserByIdV1(@PathVariable int id) {
         // ctl + alt + v
         User user = service.findOne(id);
@@ -46,8 +46,8 @@ public class AdminUserController {
         mapping.setFilters(filters);
         return mapping;
     }
-
-    @GetMapping("/v2/users/{id}")
+    // GET /admin/users/1 -> /admin/v2/users/1
+    @GetMapping(value = "/users/{id}", params = "version=2")
     public MappingJacksonValue retriveUserByIdV2(@PathVariable int id) {
         // ctl + alt + v
         User user = service.findOne(id);
